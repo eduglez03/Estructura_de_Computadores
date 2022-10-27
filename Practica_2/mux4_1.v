@@ -1,4 +1,4 @@
-module mux2_4(output wire [3:0] Out, input wire [3:0] A, input wire [3:0] B, input wire s);
+module mux4_1(output reg out, input wire a, b, c, d, input wire [1:0] S);
 
   always @(a,b,c,d, S) begin
     case (S)
