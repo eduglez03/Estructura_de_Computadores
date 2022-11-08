@@ -1,0 +1,59 @@
+$date
+	Tue Nov  8 09:57:13 2022
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	10ps
+$end
+$scope module fa_v1_tb $end
+$var wire 1 ! test_sum $end
+$var wire 1 " test_carry $end
+$var reg 1 # test_a $end
+$var reg 1 $ test_b $end
+$var reg 1 % test_cin $end
+$scope module fa1 $end
+$var wire 1 # a $end
+$var wire 1 $ b $end
+$var wire 1 % c_in $end
+$var wire 1 " sum $end
+$var wire 1 ! c_out $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0%
+0$
+0#
+0"
+0!
+$end
+#2000
+1"
+1$
+#4000
+0$
+1#
+#6000
+0"
+1!
+1$
+#8000
+1"
+0!
+1%
+0$
+0#
+#10000
+0"
+1!
+1$
+#12000
+0$
+1#
+#14000
+1"
+1$
+#16000
