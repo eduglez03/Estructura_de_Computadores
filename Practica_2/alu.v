@@ -10,8 +10,8 @@ module alu(output wire [3:0] R, output wire zero, carry, sign, input wire [3:0] 
   ul4 ul4_1 (ul4_out, OP1, OP2, ALUOp);
   mux2_4 mux2_4_3 (R, sum4_out, ul4_out, l);
 
-  assign zero = ~(R[0]|R[1]|R[2]|R[3]);
-  assign sign = R[3];
+  assign zero = ~(R[0]|R[1]|R[2]|R[3]); // se puede hacer con un operacdor ternario
+  assign sign = R[3]; // Es un 3 por que es el bit mas significativo
 
   assign op1_A = l | ALUOp[1];
   assign op2_B = l | ALUOp[1] | ALUOp[0];

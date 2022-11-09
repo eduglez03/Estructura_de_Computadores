@@ -6,7 +6,3 @@ module ul4(output wire[3:0] Out, input wire[3:0] A, input wire[3:0] B, input wir
   cl cl_3(Out[3], A[3], B[3], S);
 
 endmodule
-
-
-
-// NO ENTIENDO COMO SE IMPLEMENTA LA UNIDAD LOGICA
