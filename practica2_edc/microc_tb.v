@@ -90,7 +90,7 @@ module micro_tb;
       // INSTNATE 140
       // SKIPNE R4, R7 
       // 0001_0100_0111_0001
-      ALUOp_test = 011; // Resta R4 - R7
+      ALUOp_test = 3'b011; // Resta R4 - R7
       we_test = 1;
       s_skip_test = 1;
       s_inm_test = 0;
@@ -100,18 +100,18 @@ module micro_tb;
       // INSTNATE 180
       // SKIPGT R7, R4
       // 0011_0111_0100_0001
-      ALUOp_test = 011; 
+      ALUOp_test = 3'b011; 
       we_test = 1;
       s_skip_test = 1; 
-      s_inc_test = 0;
-      s_inm_test = 1; 
+      s_inm_test = 0; 
+      s_inc_test = 1;
       #40;    
 
 
       // INSTNATE 220
       // ADD R4, R1, R4
       // 0101_0100_0001_0100
-      ALUOp_test = 010; // Suma
+      ALUOp_test = 3'b010; // Suma
       we_test = 1;
       s_skip_test = 0;
       s_inc_test = 1;
@@ -124,28 +124,28 @@ module micro_tb;
       // INSTNATE 260
       // SKIPNE R4, R7 
       // 0001_0100_0111_0001
-      ALUOp_test = 011; // Resta R4 - R7
+      ALUOp_test = 3'b011; // Resta R4 - R7
       we_test = 1;
       s_skip_test = 1;
-      s_inm_test = 0;
       s_inc_test = 1;
+      s_inm_test = 0;
       #40;
 
 
       // INSTNATE 300
       // SKIPGT R7, R4
       // 0011_0111_0100_0001
-      ALUOp_test = 011; 
+      ALUOp_test = 3'b011; 
       we_test = 1;
       s_skip_test = 1; 
-      s_inc_test = 0;
-      s_inm_test = 1; 
+      s_inc_test = 1;
+      s_inm_test = 0; 
       #40;    
 
       // INSTNATE 340
       // ADD R4, R1, R4
       // 0101_0100_0001_0100
-      ALUOp_test = 010; // Suma
+      ALUOp_test = 3'b010; // Suma
       we_test = 1;
       s_skip_test = 0;
       s_inc_test = 1;
@@ -158,7 +158,7 @@ module micro_tb;
       // INSTNATE 380
       // SKIPNE R4, R7 
       // 0001_0100_0111_0001
-      ALUOp_test = 011; // Resta R4 - R7
+      ALUOp_test = 3'b011; // Resta R4 - R7
       we_test = 1;
       s_skip_test = 0;
       s_inm_test = 0;
