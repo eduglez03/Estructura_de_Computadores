@@ -1,20 +1,20 @@
-`timescale 1 ns/10 ps /// Directiva para el tiempo de simulación
+`timescale 1 ns/10 ps // Directiva para el tiempo de simulación
 
 module micro_tb;
 
-  /// Señales (salidas)
+  // Señales (salidas)
   wire [5:0] Opcode_test;
   wire zero_test, carry_test;
 
-  /// Señales (entradas)
+  // Señales (entradas)
   reg s_inc_test, s_skip_test, we_test, s_inm_test;
   reg [2:0] ALUOp_test;
   reg clk_test, reset_test;
 
-  /// Módulo
+  // Módulo
   microc micro_test(Opcode_test, zero_test, carry_test, clk_test, reset_test, s_skip_test, s_inc_test, s_inm_test, we_test, ALUOp_test);
 
-  /// Reloj
+  // Reloj
   always
     begin
       clk_test <= 1'b1;
@@ -23,7 +23,7 @@ module micro_tb;
       #20;
     end
   
-  /// Reset inicial
+  // Reset inicial
   initial
     begin
       reset_test <= 1'b1;
@@ -32,55 +32,177 @@ module micro_tb;
       #2;
     end
 
-  /// Pruebas
+  // Pruebas
   initial 
     begin
+
+// 0000_0000_0011_0100
+// 0000_0000_0010_0001
+// 0000_0000_0111_0111
+// 0001_0100_0111_0001
+// 0010_0000_0000_1001
+// 0011_0111_0100_0001
+// 0100_0111_0100_1010
+// 0101_0100_0001_0100
+// 0010_0000_0000_0011
+// 0010_0000_0000_1001
+
+
+
+
+
       $monitor("ALU(%b) we(%b) skip(%b) inc(%b) inm(%b)", ALUOp_test, we_test, s_skip_test, s_inc_test, s_inm_test);
       $dumpfile("micro_tb.vcd");
       $dumpvars;
 
-      /// Decodificación
       #20;
-      /// LI #3, R1
-      /// 0000_0000_0010_0001
-      ALUOp_test = 000; /// Nos da igual
+      // INSTNATE 20
+      // LI #3, R4
+      // 0000_0000_0011_0100
+      ALUOp_test = 3'b000;
+      we_test = 1;
+      s_skip_test = 0;
+      s_inm_test = 1;
+      s_inc_test = 1;
+      #40;
+      // INSTNATE 60
+      // LI #2, R1
+      // 0000_0000_0010_0001
+      ALUOp_test = 3'b000;
       we_test = 1;
       s_skip_test = 0;
       s_inm_test = 1;
       s_inc_test = 1;
       #40;
 
-      /// LI #1, R2
-      /// 0000_0000_0001_0010
-      ALUOp_test = 000; /// Nos da igual
+      // INSTNATE 100
+      // LI #7, R7
+      // 0000_0000_0111_0111
+      ALUOp_test = 3'b000;
       we_test = 1;
       s_skip_test = 0;
-      s_inc_test = 1;
       s_inm_test = 1;
-      #40;
-
-      /// ADD R1, R2, R3 (3 + 1 = 4 = 0100)
-      ALUOp_test = 010; /// Suma
-      we_test = 1;
-      s_skip_test = 0;
       s_inc_test = 1;
-      s_inm_test = 0;
       #40;
 
-      /// SUB R2, R2, R4 (1 + 1 = 0 = 0000)
-      ALUOp_test = 011; /// Resta
+    // BUCLE 
+
+      // INSTNATE 140
+      // SKIPNE R4, R7 
+      // 0001_0100_0111_0001
+      ALUOp_test = 011; // Resta R4 - R7
       we_test = 1;
-      s_skip_test = 0;
-      s_inc_test = 1;
+      s_skip_test = 1;
       s_inm_test = 0;
+      s_inc_test = 1;
       #40;
 
-      /// Salto incondicional
-      ALUOp_test = 000; /// Nos da igual
-      we_test = 0;
-      s_skip_test = 0; /// Nos da igual
+      // INSTNATE 180
+      // SKIPGT R7, R4
+      // 0011_0111_0100_0001
+      ALUOp_test = 011; 
+      we_test = 1;
+      s_skip_test = 1; 
       s_inc_test = 0;
-      s_inm_test = 0; /// Nos da igual
+      s_inm_test = 1; 
+      #40;    
+
+
+      // INSTNATE 220
+      // ADD R4, R1, R4
+      // 0101_0100_0001_0100
+      ALUOp_test = 010; // Suma
+      we_test = 1;
+      s_skip_test = 0;
+      s_inc_test = 1;
+      s_inm_test = 0;
+      #40;
+      
+
+// BUCLE SEGUNDA PASADA
+
+      // INSTNATE 260
+      // SKIPNE R4, R7 
+      // 0001_0100_0111_0001
+      ALUOp_test = 011; // Resta R4 - R7
+      we_test = 1;
+      s_skip_test = 1;
+      s_inm_test = 0;
+      s_inc_test = 1;
+      #40;
+
+
+      // INSTNATE 300
+      // SKIPGT R7, R4
+      // 0011_0111_0100_0001
+      ALUOp_test = 011; 
+      we_test = 1;
+      s_skip_test = 1; 
+      s_inc_test = 0;
+      s_inm_test = 1; 
+      #40;    
+
+      // INSTNATE 340
+      // ADD R4, R1, R4
+      // 0101_0100_0001_0100
+      ALUOp_test = 010; // Suma
+      we_test = 1;
+      s_skip_test = 0;
+      s_inc_test = 1;
+      s_inm_test = 0;
+      #40;
+
+
+// BUCLE 2 FIN 
+
+      // INSTNATE 380
+      // SKIPNE R4, R7 
+      // 0001_0100_0111_0001
+      ALUOp_test = 011; // Resta R4 - R7
+      we_test = 1;
+      s_skip_test = 0;
+      s_inm_test = 0;
+      s_inc_test = 1;
+      #40;
+
+      // INSTNATE 420
+      // FIN DEL PROGRAMA
+      // 0010_0000_0000_1001
+      ALUOp_test = 3'b000; 
+      we_test = 0;
+      s_skip_test = 0; 
+      s_inc_test = 0;
+      s_inm_test = 0; 
+      #40;
+
+      // INSTNATE 460
+      // 
+      // 0010_0000_0000_1001
+      ALUOp_test = 3'b000; 
+      we_test = 0;
+      s_skip_test = 0; 
+      s_inc_test = 0;
+      s_inm_test = 0; 
+      #40;
+      // 
+      // INSTNATE 500
+
+      // 0010_0000_0000_1001
+      ALUOp_test = 3'b000; 
+      we_test = 0;
+      s_skip_test = 0; 
+      s_inc_test = 0;
+      s_inm_test = 0; 
+      #40;
+      // 
+      // INSTNATE 540
+
+      // 0010_0000_0000_1001
+      ALUOp_test = 3'b000; 
+      we_test = 0;
+      s_skip_test = 0; 
+      s_inc_test = 0;
+      s_inm_test = 0; 
       #40;
 
       $finish;
